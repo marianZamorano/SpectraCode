@@ -45,16 +45,12 @@ def get_ast_score(code: str) -> Dict[str, Any]:
 
     if visitor.node_count == 0:
         return {"score": 0.0, "features": {}}
-
-    # Métricas estilométricas (human-like vs AI-like)
     avg_depth = visitor.max_depth
     complexity = (visitor.loop_count + visitor.branch_count) / max(1, visitor.function_count)
     entropy = 0.0
     if visitor.node_types:
         total = sum(visitor.node_types.values())
         entropy = -sum((count/total) * math.log(count/total + 1e-10) for count in visitor.node_types.values())
-
-    # Score: IA tiende a profundidad baja, complejidad alta, entropía baja
     score = 0.0
     score += min(avg_depth / 10.0, 1.0) * 0.3
     score += min(complexity, 3.0) / 3.0 * 0.4

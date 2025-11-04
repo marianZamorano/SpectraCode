@@ -4,6 +4,7 @@ from typing import List, Dict
 import tempfile
 import os
 
+
 def extract_python_files(zip_path: str) -> List[Dict[str, str]]:
     files = []
     try:
@@ -12,7 +13,7 @@ def extract_python_files(zip_path: str) -> List[Dict[str, str]]:
                 z.extractall(tmpdir)
                 tmp_path = Path(tmpdir)
                 for py_file in tmp_path.rglob("*.py"):
-                    if py_file.is_file() and py_file.stat().st_size < 10_000_000:  # <10MB
+                    if py_file.is_file() and py_file.stat().st_size < 10_000_000:
                         try:
                             content = py_file.read_text(encoding="utf-8", errors="ignore")
                             rel_path = str(py_file.relative_to(tmp_path))
