@@ -1,0 +1,25 @@
+# docker-compose.yaml
+version: '3.9'
+
+services:
+  codeguard:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    command: uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      - rag-builder
+
+  rag-builder:
+    build: .
+    command: python rag/build_rag.py
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
