@@ -4,7 +4,6 @@ from typing import List, Dict
 import tempfile
 import os
 
-
 def extract_python_files(zip_path: str) -> List[Dict[str, str]]:
     files = []
     try:

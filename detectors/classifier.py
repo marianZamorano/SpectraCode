@@ -1,7 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
-
 class CodeBERTClassifier:
     def __init__(self):
         self.tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
