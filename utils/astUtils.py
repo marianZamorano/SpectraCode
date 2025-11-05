@@ -3,10 +3,6 @@ import math
 from typing import Dict, Any
 
 def get_ast_score(code: str) -> Dict[str, Any]:
-    """
-    Analiza el AST del código y devuelve métricas estilométricas.
-    Basado en patrones humanos vs IA (profundidad, complejidad, repetición).
-    """
     try:
         tree = ast.parse(code)
     except:
